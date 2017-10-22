@@ -1,0 +1,21 @@
+/**
+ * OR3 Main Class
+ */
+
+public class Main {
+    private static Client client;
+
+    private static Client getClient() {
+        if (client == null) {
+            client = new Client();
+        }
+        return client;
+    }
+
+    public static void main(String[] args) {
+        //TODO: Get a client, throw up the GUI
+        getClient();
+
+
+    }
+}
