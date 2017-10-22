@@ -3,7 +3,7 @@
  */
 public class Review {
     private int reviewID;
-    public String user;
+    public int user;
     public int date;
     public int[] rating;
     public String body;
