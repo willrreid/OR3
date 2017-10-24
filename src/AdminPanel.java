@@ -1,8 +1,9 @@
+import DataManagement.DatabaseTransferObject.Report;
+
 /**
  * Created by will on 10/21/17.
  */
 public class AdminPanel {
-    private DAO dao;
 
     public void makeAdmin(String username) {
         //TODO update user table
@@ -16,7 +17,8 @@ public class AdminPanel {
     }
 
     public void resolveReport(Report r) {
-        r.resolve();
+        return;
+        //r.resolve();
     }
 
     public int addRestaurant(String name,

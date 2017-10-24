@@ -1,3 +1,5 @@
+import DataManagement.DatabaseTransferObject.User;
+
 /**
  * Created by will on 10/21/17.
  */

@@ -1,13 +1,13 @@
+import DataManagement.DatabaseTransferObject.User;
+
 /**
  * Created by will on 10/21/17.
  */
 class Client {
     private static User user;
-    private static DAO dao;
     private static Authenticator authenticator;
 
     Client() {
-        dao = new DAO();
         authenticator = new Authenticator();
 
     }

@@ -13,8 +13,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //TODO: Get a client, throw up the GUI
-        getClient();
+
 
 
     }
