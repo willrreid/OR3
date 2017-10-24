@@ -50,5 +50,12 @@ public class DB_TEST {
         System.out.println(restaurantDAO.getById(1));
         System.out.println(reviewDAO.getById(1));
         System.out.println(reportDAO.getById(1));
+
+        User editedUser = userDAO.getById(1);
+        editedUser.setBio("Wow look I changed my bio!");
+        userDAO.save(editedUser);
+
+        Restaurant restaurantToDelete = restaurantDAO.getById(1);
+        restaurantDAO.delete(restaurantToDelete.getId());
     }
 }

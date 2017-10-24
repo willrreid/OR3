@@ -19,8 +19,7 @@ public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
     }
 
     public boolean save(Restaurant restaurant){
-        Connection connection = ConnectionFactory.getConnection();
-        try {
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement ps;
             if (restaurant.getId() == null) {
                 ps = connection.prepareStatement("INSERT INTO restaurant VALUES (NULL, ?, ?, ?, ?, ?)");
@@ -39,6 +38,7 @@ public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
                 if (restaurant.getId() == null){
                     restaurant.setId(ps.getGeneratedKeys().getInt(1));
                 }
+                ps.close();
                 return true;
             }
         } catch (SQLException ex) {

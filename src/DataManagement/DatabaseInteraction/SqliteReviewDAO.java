@@ -18,8 +18,7 @@ public class SqliteReviewDAO extends SqliteDAO<Review> {
     }
 
     public boolean save(Review review) {
-        Connection connection = ConnectionFactory.getConnection();
-        try {
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement ps;
             if (review.getId() == null) {
                 ps = connection.prepareStatement("INSERT INTO review VALUES (NULL, ?, ?, ?, ?)");
@@ -36,6 +35,7 @@ public class SqliteReviewDAO extends SqliteDAO<Review> {
                 if (review.getId() == null) {
                     review.setId(ps.getGeneratedKeys().getInt(1));
                 }
+                ps.close();
                 return true;
             }
         } catch (SQLException ex) {

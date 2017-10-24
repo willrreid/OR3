@@ -19,8 +19,7 @@ public class SqliteReportDAO extends SqliteDAO<Report> {
     }
 
     public boolean save(Report report){
-        Connection connection = ConnectionFactory.getConnection();
-        try {
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement ps;
             if (report.getId() == null) {
                 ps = connection.prepareStatement("INSERT INTO report VALUES (NULL, ?, ?, ?, ?, ?)");
@@ -39,6 +38,7 @@ public class SqliteReportDAO extends SqliteDAO<Report> {
                 if (report.getId() == null){
                     report.setId(ps.getGeneratedKeys().getInt(1));
                 }
+                ps.close();
                 return true;
             }
         } catch (SQLException ex) {

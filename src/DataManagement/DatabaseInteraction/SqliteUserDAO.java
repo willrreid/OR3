@@ -18,8 +18,7 @@ public class SqliteUserDAO extends SqliteDAO<User>{
     }
 
     public boolean save(User user) {
-        Connection connection = ConnectionFactory.getConnection();
-        try {
+        try (Connection connection = ConnectionFactory.getConnection()){
             PreparedStatement ps;
             if (user.getId() == null) {
                 ps = connection.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?, ?)");
@@ -36,6 +35,7 @@ public class SqliteUserDAO extends SqliteDAO<User>{
                 if (user.getId() == null) {
                     user.setId(ps.getGeneratedKeys().getInt(1));
                 }
+                ps.close();
                 return true;
             }
         } catch (SQLException ex) {

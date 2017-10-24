@@ -1,12 +1,10 @@
 package GUI;
+import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Home {
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     private static void createOR3GUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("OR3");
@@ -17,12 +15,11 @@ public class Home {
         frame.getContentPane().add(label);
 
         //List of Restaurants
-        RestaurantLister rList = new RestaurantLister();
-        frame.getContentPane().add(rList);
-
-        //Selected Restaurant Info
-        RestaurantInfo rInfo = new RestaurantInfo();
-        frame.getContentPane().add(rInfo);
+        JScrollPane jScrollPane = new JScrollPane();
+        JTable rTable = new JTable();
+        rTable.setModel(new RestaurantLister(new ArrayList<>(new SqliteRestaurantDAO().getAll())));
+        jScrollPane.setViewportView(rTable);
+        frame.getContentPane().add(jScrollPane);
 
         //Display the window.
         frame.pack();

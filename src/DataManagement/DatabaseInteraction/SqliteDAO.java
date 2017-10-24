@@ -18,7 +18,10 @@ public abstract class SqliteDAO<T> {
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + getTableName() + " WHERE id=" + id);
             if(rs.next())
             {
-                return extractFromResultSet(rs);
+                T returnValue = extractFromResultSet(rs);
+                stmt.close();
+                rs.close();
+                return returnValue;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -36,6 +39,8 @@ public abstract class SqliteDAO<T> {
                 {
                     result.add(extractFromResultSet(rs));
                 }
+                stmt.close();
+                rs.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
