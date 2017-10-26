@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RestaurantLister extends AbstractTableModel {
 
-    private List<Restaurant>  restaurants = new ArrayList<Restaurant>();
+    private List<Restaurant>  restaurants = new ArrayList<>();
     private String[] columnNames = {"Name", "Address", "Category", "Website"};
 
     public RestaurantLister(List<Restaurant> restaurants){

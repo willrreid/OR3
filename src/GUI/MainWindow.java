@@ -2,27 +2,20 @@ package GUI;
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
-public class Home {
+public class MainWindow {
+
     private static void createOR3GUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("OR3");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+        frame.getContentPane().add(new HomeView());
+        frame.getContentPane().add(new JButton("HOME"));
+        frame.setSize(600,400);
 
-        //Title
-        JLabel label = new JLabel("OR3");
-        frame.getContentPane().add(label);
-
-        //List of Restaurants
-        JScrollPane jScrollPane = new JScrollPane();
-        JTable rTable = new JTable();
-        rTable.setModel(new RestaurantLister(new ArrayList<>(new SqliteRestaurantDAO().getAll())));
-        jScrollPane.setViewportView(rTable);
-        frame.getContentPane().add(jScrollPane);
-
-        //Display the window.
-        frame.pack();
         frame.setVisible(true);
     }
 
@@ -34,3 +27,6 @@ public class Home {
         });
     }
 }
+
+
+
