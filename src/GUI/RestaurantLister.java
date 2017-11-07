@@ -2,62 +2,85 @@ package GUI;
 
 import DataManagement.DatabaseTransferObject.Restaurant;
 
-import javax.swing.table.AbstractTableModel;
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantLister extends AbstractTableModel {
+public class RestaurantLister extends JPanel {
 
     private List<Restaurant>  restaurants = new ArrayList<>();
-    private String[] columnNames = {"Name", "Address", "Category", "Website"};
+    private List<RestaurantView> restaurantViews = new ArrayList<>();
+    private RestaurantView selected = null;
 
     public RestaurantLister(List<Restaurant> restaurants){
         this.restaurants = restaurants;
-    }
 
-    @Override
-    public String getColumnName(int columnIndex){
-        return columnNames[columnIndex];
-    }
-
-    @Override
-    public int getRowCount() {
-        return restaurants.size();
-    }
-
-    @Override
-    public int getColumnCount() {
-        return 4;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Restaurant r = restaurants.get(rowIndex);
-        switch (columnIndex) {
-            case 0:
-                return r.getName();
-            case 1:
-                return r.getAddress();
-            case 2:
-                return r.getCategory();
-            case 3:
-                return r.getWebsite();
+        for (Restaurant r : this.restaurants) {
+            restaurantViews.add(new RestaurantView(r));
         }
-        return null;
+
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        JPanel pane = new JPanel();
+        pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+        JScrollPane scrollPane = new JScrollPane(pane);
+        scrollPane.setPreferredSize(new Dimension(325,600));
+        add(scrollPane);
+
+
+
+        for (RestaurantView rv : this.restaurantViews){
+            pane.add(rv);
+            rv.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (getSelected() != null) {
+                        getSelected().setSelected(false);
+                    }
+                    if (getSelected() == rv){
+                        setSelected(null);
+                        rv.setSelected(false);
+                    }
+                    else {
+                        setSelected(rv);
+                        rv.setSelected(true);
+                    }
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+        }
+
+        setBorder(BorderFactory.createTitledBorder("Restaurants"));
+
     }
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex){
-        switch (columnIndex){
-            case 0:
-                return String.class;
-            case 1:
-                return String.class;
-            case 2:
-                return String.class;
-            case 3:
-                return String.class;
-        }
-        return null;
+    public RestaurantView getSelected() {
+        return selected;
+    }
+
+    public void setSelected(RestaurantView selected) {
+        this.selected = selected;
     }
 }
