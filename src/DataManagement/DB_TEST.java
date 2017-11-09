@@ -23,8 +23,8 @@ public class DB_TEST {
         Restaurant restaurant1 = new Restaurant(true, "McDonald's", "1 McNugget Way", "Fast", "McDonalds.com");
         Restaurant restaurant2 = new Restaurant(true, "Subway", "1 Footlong Drive", "Fast", "subway.com");
 
-        Review review1 = new Review(1, 100, 10, "Great food!");
-        Review review2 = new Review(2, 200, 5, "Ok I guess.");
+        Review review1 = new Review(1, 1, 100, 10, "Great food!");
+        Review review2 = new Review(2, 2,200, 5, "Ok I guess.");
 
         Report report1 = new Report(1, 2, 1, 66, "Rude af");
         Report report2 = new Report(2, 1, 2, 77, "Bein mean");

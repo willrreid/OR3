@@ -7,6 +7,7 @@ public class Review {
     //Database Fields
     private Integer id;
     private Integer user_id;
+    private Integer restaurant_id;
     private Integer time;
     private Integer rating;
     private String body;
@@ -15,16 +16,18 @@ public class Review {
     public Review(){
     }
 
-    public Review(Integer user_id, Integer time, Integer rating, String body){
+    public Review(Integer user_id, Integer restaurant_id, Integer time, Integer rating, String body){
         setUser_id(user_id);
+        setRestaurant_id(restaurant_id);
         setTime(time);
         setRating(rating);
         setBody(body);
     }
 
-    public Review(Integer id, Integer user_id, Integer time, Integer rating, String body){
+    public Review(Integer id, Integer user_id, Integer restaurant_id, Integer time, Integer rating, String body){
         setId(id);
         setUser_id(user_id);
+        setRestaurant_id(restaurant_id);
         setTime(time);
         setRating(rating);
         setBody(body);
@@ -46,6 +49,10 @@ public class Review {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
+
+    public Integer getRestaurant_id() { return restaurant_id; }
+
+    public void setRestaurant_id(Integer restaurant_id) { this.restaurant_id = restaurant_id; }
 
     public Integer getTime() {
         return time;

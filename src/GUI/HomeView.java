@@ -1,27 +1,18 @@
 package GUI;
 
+import sun.applet.Main;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class HomeView extends JPanel {
 
-    HomeView() {
-        setLayout(new BorderLayout());
-        add(initTop(), BorderLayout.NORTH);
+    HomeView(MainWindow w) {
+        parent = w;
+        this.setLayout(new GridLayout(3,2));
     }
+    MainWindow parent;
 
-    JTextField searchField = new JTextField(30);
-    JButton searchButton = new JButton("Search");
-    JButton loginButton = new JButton("Log In");
-    JButton profileButton = new JButton("Profile");
-
-    private JPanel initTop() {
-        JPanel panel = new JPanel();
-        JPanel searchPanel = new JPanel();
-        searchPanel.add(searchField);
-        searchPanel.add(searchButton);
-        panel.add(searchPanel);
-        panel.add(loginButton);
-        return panel;
-    }
 }

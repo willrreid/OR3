@@ -3,6 +3,8 @@ package DataManagement.DatabaseInteraction;
 import DataManagement.DatabaseTransferObject.Restaurant;
 
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
     protected String table_name = "restaurant";
@@ -45,6 +47,25 @@ public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public Set<Restaurant> search(String s){
+        Connection connection = ConnectionFactory.getConnection();
+        Set<Restaurant> result = new HashSet<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM restaurant WHERE name LIKE \"%" + s +"%\"");
+            while (rs.next()) {
+                System.out.println("A RESULT");
+                result.add(extractFromResultSet(rs));
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.print(result);
+        return result;
     }
 
     @Override

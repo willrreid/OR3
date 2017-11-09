@@ -1,3 +1,5 @@
+import GUI.MainWindow;
+
 /**
  * OR3 Main Class
  */
@@ -13,6 +15,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        GUI.MainWindow.main(args);
+        GUI.MainWindow mainWindow = new MainWindow();
     }
 }

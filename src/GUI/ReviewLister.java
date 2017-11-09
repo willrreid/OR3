@@ -1,29 +1,31 @@
 package GUI;
 
-import DataManagement.DatabaseTransferObject.Restaurant;
+import DataManagement.DatabaseTransferObject.Review;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantLister extends JPanel {
+/**
+ * Created by will on 11/8/17.
+ */
+public class ReviewLister extends JPanel {
 
     private SearchResultView parent;
-    private List<Restaurant>  restaurants = new ArrayList<>();
-    private List<RestaurantView> restaurantViews = new ArrayList<>();
-    private RestaurantView selected = null;
+    private List<Review> reviews = new ArrayList<>();
+    private List<ReviewView> reviewViews = new ArrayList<>();
+    private ReviewView selected = null;
 
-    public RestaurantLister(List<Restaurant> restaurants, SearchResultView parent) {
+    public ReviewLister(List<Review> reviews, SearchResultView parent) {
         this.parent = parent;
-        this.restaurants = restaurants;
+        this.reviews = reviews;
 
-        for (Restaurant r : this.restaurants) {
-            System.out.print("ADDING A RESTAURANT");
-            restaurantViews.add(new RestaurantView(r));
+        for (Review r : this.reviews) {
+            System.out.print("ADDING A REVIEW");
+            reviewViews.add(new ReviewView(r));
         }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -35,7 +37,7 @@ public class RestaurantLister extends JPanel {
 
 
 
-        for (RestaurantView rv : this.restaurantViews){
+        for (ReviewView rv : this.reviewViews){
             pane.add(rv);
             rv.addMouseListener(new MouseListener() {
                 @Override
@@ -75,15 +77,15 @@ public class RestaurantLister extends JPanel {
             });
         }
 
-        setBorder(BorderFactory.createTitledBorder("Restaurants"));
+        setBorder(BorderFactory.createTitledBorder("Reviews"));
 
     }
 
-    public RestaurantView getSelected() {
+    public ReviewView getSelected() {
         return selected;
     }
 
-    public void setSelected(RestaurantView selected) {
+    public void setSelected(ReviewView selected) {
         this.selected = selected;
     }
 }
