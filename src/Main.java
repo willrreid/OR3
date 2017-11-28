@@ -1,3 +1,4 @@
+import DataManagement.DatabaseTransferObject.User;
 import GUI.MainWindow;
 
 /**
@@ -5,15 +6,6 @@ import GUI.MainWindow;
  */
 
 public class Main {
-    private static Client client;
-
-    private static Client getClient() {
-        if (client == null) {
-            client = new Client();
-        }
-        return client;
-    }
-
     public static void main(String[] args) {
         GUI.MainWindow mainWindow = new MainWindow();
     }

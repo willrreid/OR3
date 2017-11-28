@@ -1,5 +1,6 @@
 package GUI;
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
+import DataManagement.DatabaseTransferObject.User;
 
 import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
@@ -88,7 +89,7 @@ public class MainWindow implements ActionListener {
                 break;
 
             case "login":
-                System.out.println("WORKIN ON IT");
+                Login login = new Login();
                 topBar.remove(loginButton);
                 topBar.add(profileButton);
                 topBar.revalidate();

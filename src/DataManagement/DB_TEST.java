@@ -17,8 +17,8 @@ public class DB_TEST {
         SqliteReviewDAO reviewDAO = new SqliteReviewDAO();
         SqliteUserDAO userDAO = new SqliteUserDAO();
 
-        User user1 = new User("Mason", 12345, "The best, around", true);
-        User user2 = new User("Will", 54321, "Nothing's gonna ever bring him down", false);
+        User user1 = new User("Mason","password", 12345, "The best, around", true);
+        User user2 = new User("Will","password", 54321, "Nothing's gonna ever bring him down", false);
 
         Restaurant restaurant1 = new Restaurant(true, "McDonald's", "1 McNugget Way", "Fast", "McDonalds.com");
         Restaurant restaurant2 = new Restaurant(true, "Subway", "1 Footlong Drive", "Fast", "subway.com");
@@ -31,6 +31,8 @@ public class DB_TEST {
 
         userDAO.save(user1);
         userDAO.save(user2);
+        User mason = userDAO.getByName("Mason");
+        System.out.println(mason);
 
         restaurantDAO.save(restaurant1);
         restaurantDAO.save(restaurant2);

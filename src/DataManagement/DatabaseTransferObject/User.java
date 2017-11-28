@@ -8,6 +8,7 @@ public class User {
     //Database Fields
     private Integer id;
     private String username;
+    private String password;
     private Integer join_date;
     private String bio;
     private Boolean admin;
@@ -16,16 +17,18 @@ public class User {
     public User(){
     }
 
-    public User(String username, Integer join_date, String bio, Boolean admin){
+    public User(String username, String password, Integer join_date, String bio, Boolean admin){
         setUsername(username);
+        setPassword(password);
         setJoin_date(join_date);
         setBio(bio);
         setAdmin(admin);
     }
 
-    public User(Integer id, String username, Integer join_date, String bio, Boolean admin){
+    public User(Integer id, String username, String password, Integer join_date, String bio, Boolean admin){
         setId(id);
         setUsername(username);
+        setPassword(password);
         setJoin_date(join_date);
         setBio(bio);
         setAdmin(admin);
@@ -70,5 +73,13 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
