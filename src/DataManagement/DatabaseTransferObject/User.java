@@ -1,6 +1,5 @@
 package DataManagement.DatabaseTransferObject;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by will on 10/21/17.

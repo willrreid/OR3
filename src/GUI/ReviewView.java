@@ -1,7 +1,6 @@
 package GUI;
 
 import DataManagement.DatabaseTransferObject.Review;
-import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
 import java.awt.*;
