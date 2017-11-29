@@ -14,6 +14,7 @@ public class Login extends JDialog {
     private JLabel passwordLabel = new JLabel("Password:");
     private JButton loginButton = new JButton("Login");
     private JButton cancelButton = new JButton("Cancel");
+    private JButton newUserButton = new JButton("New User");
     public User user = null;
 
     public Login(){
@@ -25,7 +26,7 @@ public class Login extends JDialog {
         this.setTitle("OR3 Login");
 
         this.setSize(500,200);
-        this.setLayout(new GridLayout(3,2));
+        this.setLayout(new GridLayout(4,2));
 
         this.add(usernameLabel);
         this.add(usernameField);
@@ -33,6 +34,7 @@ public class Login extends JDialog {
         this.add(passwordField);
         this.add(loginButton);
         this.add(cancelButton);
+        this.add(newUserButton);
     }
 
     private void setUpListeners(){
@@ -49,6 +51,16 @@ public class Login extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+            }
+        });
+
+        newUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                CreateUser create = new CreateUser();
+                create.setModal(true);
+                create.setVisible(true);
+
             }
         });
     }

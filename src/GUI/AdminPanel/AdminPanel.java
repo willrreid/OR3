@@ -1,8 +1,4 @@
-package GUI;
-
-import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
-import DataManagement.DatabaseTransferObject.Report;
-import DataManagement.DatabaseTransferObject.Restaurant;
+package GUI.AdminPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +10,7 @@ import java.awt.event.ActionListener;
  */
 public class AdminPanel extends JDialog {
     private JButton addRestaurant = new JButton("Add Restaurant");
-    private JButton updateAdmins = new JButton("Update Admins");
+    private JButton manageAdmins = new JButton("Manage Admins");
     private JButton getStatistics = new JButton("Get Statistics");
     private JButton exitButton = new JButton("Exit");
 
@@ -29,7 +25,7 @@ public class AdminPanel extends JDialog {
         this.setLayout(new GridLayout(4,2));
 
         this.add(addRestaurant);
-        this.add(updateAdmins);
+        this.add(manageAdmins);
         this.add(getStatistics);
         this.add(exitButton);
 
@@ -44,10 +40,9 @@ public class AdminPanel extends JDialog {
             }
         });
 
-        updateAdmins.addActionListener(new ActionListener() {
+        manageAdmins.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+            public void actionPerformed(ActionEvent e) { new ManageAdmins(); }
         });
 
         getStatistics.addActionListener(new ActionListener() {

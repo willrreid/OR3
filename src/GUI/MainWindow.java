@@ -1,14 +1,11 @@
 package GUI;
-import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
-import DataManagement.DatabaseTransferObject.User;
+import GUI.AdminPanel.AdminPanel;
 import UserAuthentication.Authenticator;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class MainWindow implements ActionListener {
 

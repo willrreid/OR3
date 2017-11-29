@@ -1,4 +1,4 @@
-package GUI;
+package GUI.AdminPanel;
 
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 import DataManagement.DatabaseTransferObject.Restaurant;
