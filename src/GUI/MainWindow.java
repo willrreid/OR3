@@ -116,6 +116,10 @@ public class MainWindow implements ActionListener {
                 topBar = initTop();
                 frame.add(topBar, BorderLayout.NORTH);
                 topBar.revalidate();
+                try {
+                    ((SearchResultView) currentMainPanel).displayForRestaurant(((SearchResultView) currentMainPanel).getResultList().getSelected().getRestaurant());
+                    ((SearchResultView) currentMainPanel).getResultList().getSelected().updateAverage();
+                } catch (Exception ex) {}
                 break;
 
             case "logout":
@@ -125,6 +129,10 @@ public class MainWindow implements ActionListener {
                 topBar = initTop();
                 frame.add(topBar, BorderLayout.NORTH);
                 topBar.revalidate();
+                try {
+                    ((SearchResultView) currentMainPanel).displayForRestaurant(((SearchResultView) currentMainPanel).getResultList().getSelected().getRestaurant());
+                    ((SearchResultView) currentMainPanel).getResultList().getSelected().updateAverage();
+                } catch (Exception ex) {}
                 break;
 
             case "adminPanel":
