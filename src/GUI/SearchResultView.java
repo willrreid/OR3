@@ -23,6 +23,7 @@ public class SearchResultView extends JPanel implements ActionListener {
     JPanel infoView;
     JPanel writeView;
 
+    JComboBox rating;
     JTextArea review;
     JButton submit;
 
@@ -65,8 +66,16 @@ public class SearchResultView extends JPanel implements ActionListener {
         JPanel container = new JPanel();
         container.setLayout(new BorderLayout());
 
+
+        rating = new JComboBox();
+        rating.addItem(1);
+        rating.addItem(2);
+        rating.addItem(3);
+        rating.addItem(4);
+        rating.addItem(5);
         review = new JTextArea(20,20);
 
+        container.add(rating, BorderLayout.NORTH);
         container.add(review, BorderLayout.CENTER);
         container.add(submit, BorderLayout.SOUTH);
 
@@ -109,7 +118,7 @@ public class SearchResultView extends JPanel implements ActionListener {
                     return;
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                Review r = new Review(user.getId(),resultList.getSelected().getRestaurant().getId(), sdf.format(new Date()), 5, review.getText());
+                Review r = new Review(user.getId(),resultList.getSelected().getRestaurant().getId(), sdf.format(new Date()), rating.getSelectedIndex()+1, review.getText());
                 r.setBody(review.getText());
                 new SqliteReviewDAO().save(r);
         }
