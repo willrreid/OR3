@@ -47,16 +47,8 @@ public class SearchResultView extends JPanel implements ActionListener {
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-        JPanel info = new JPanel();
-        info.setLayout(new FlowLayout());
-        info.add(new JLabel(r.getName()));
-        info.add(new JLabel(r.getCategory()));
-        info.add(new JLabel(r.getAddress()));
-        info.add(new JLabel(r.getWebsite()));
-
         JPanel reviews = new ReviewLister(new ArrayList<>(new SqliteReviewDAO().getForRestaurantID(r.getId())), this);
 
-        container.add(info);
         container.add(reviews);
 
         return container;

@@ -1,6 +1,7 @@
 package GUI;
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 import DataManagement.DatabaseTransferObject.User;
+import UserAuthentication.Authenticator;
 
 import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
@@ -20,8 +21,8 @@ public class MainWindow implements ActionListener {
     JTextField searchField = new JTextField(30);
     JButton searchButton = new JButton("Search");
     JButton loginButton = new JButton("Log In");
-    JButton profileButton = new JButton("Profile");
-    JButton newRestaurantButton = new JButton("New Restaurant");
+    JButton logoutButton = new JButton("Log Out");
+    JButton adminPanelButton = new JButton("Admin Panel");
 
     public MainWindow() {
 
@@ -34,11 +35,11 @@ public class MainWindow implements ActionListener {
         loginButton.setActionCommand("login");
         loginButton.addActionListener(this);
 
-        profileButton.setActionCommand("profile");
-        profileButton.addActionListener(this);
+        logoutButton.setActionCommand("logout");
+        logoutButton.addActionListener(this);
 
-        newRestaurantButton.setActionCommand("newRestaurant");
-        newRestaurantButton.addActionListener(this);
+        adminPanelButton.setActionCommand("newRestaurant");
+        adminPanelButton.addActionListener(this);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -49,7 +50,7 @@ public class MainWindow implements ActionListener {
 
     private void createOR3GUI() {
         //set up the window.
-        frame.setSize(900,700);
+        frame.setSize(1000,800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout());
 
@@ -72,8 +73,14 @@ public class MainWindow implements ActionListener {
 
         panel.add(searchField);
         panel.add(searchButton);
-        panel.add(loginButton);
-        panel.add(newRestaurantButton);
+        if (Authenticator.loggedInUser() == null) {
+            panel.add(loginButton);
+        } else {
+            panel.add(logoutButton);
+        }
+        if (Authenticator.loggedInUser() != null && Authenticator.loggedInUser().isAdmin()) {
+            panel.add(adminPanelButton);
+        }
 
         return panel;
     }
@@ -95,17 +102,25 @@ public class MainWindow implements ActionListener {
 
             case "login":
                 Login login = new Login();
-                topBar.remove(loginButton);
-                topBar.add(profileButton);
+                login.setModal(true);
+                login.setVisible(true);
+                frame.remove(topBar);
+                topBar = initTop();
+                frame.add(topBar, BorderLayout.NORTH);
                 topBar.revalidate();
                 break;
 
-            case "profile":
-                System.out.println("HEY LOSER");
+            case "logout":
+                JOptionPane.showMessageDialog(new Frame(), "Logged out.");
+                Authenticator.logout();
+                frame.remove(topBar);
+                topBar = initTop();
+                frame.add(topBar, BorderLayout.NORTH);
+                topBar.revalidate();
                 break;
 
             case "newRestaurant":
-                new CreateRestaurant();
+                new AdminPanel();
                 break;
 
             case "home":

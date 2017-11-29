@@ -27,7 +27,7 @@ public class ReviewView extends JPanel {
         body = new JTextField(r.getBody());
         body.setEditable(false);
 
-        setLayout(new GridLayout(3,2,0,0));
+        setLayout(new GridLayout(4,2,0,0));
         add(new JLabel("Posted By:"));
         add(userID);
         add(new JLabel("Rating:"));

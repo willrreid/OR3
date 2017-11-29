@@ -1,10 +1,8 @@
 package GUI;
 
-import DataManagement.DatabaseInteraction.ConnectionFactory;
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 import DataManagement.DatabaseTransferObject.Restaurant;
 import DataManagement.DatabaseTransferObject.User;
-import UserAuthentication.Authenticator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +12,7 @@ import java.awt.event.ActionListener;
 public class CreateRestaurant extends JDialog{
     private JTextField nameField = new JTextField();
     private JTextField addressField = new JTextField();
-    private String[] categories = {"Fast Foot","Thai","Fusion","Chinese","Indian","Japanese","Korean","BBQ","Italian","Diner","Drive-in","Dive"};
+    private String[] categories = {"Fast Food","Thai","Fusion","Chinese","Indian","Japanese","Korean","BBQ","Italian","Diner","Drive-in","Dive"};
     private JComboBox categoryField = new JComboBox(categories);
     private JTextField websiteField = new JTextField();
     private JLabel nameLabel = new JLabel("Name:");

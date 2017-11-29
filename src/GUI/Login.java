@@ -33,8 +33,6 @@ public class Login extends JDialog {
         this.add(passwordField);
         this.add(loginButton);
         this.add(cancelButton);
-
-        this.setVisible(true);
     }
 
     private void setUpListeners(){

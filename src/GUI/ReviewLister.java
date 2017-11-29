@@ -32,7 +32,7 @@ public class ReviewLister extends JPanel {
         JPanel pane = new JPanel();
         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
         JScrollPane scrollPane = new JScrollPane(pane);
-        scrollPane.setPreferredSize(new Dimension(325,600));
+        scrollPane.setPreferredSize(new Dimension(325,560));
         add(scrollPane);
 
 
