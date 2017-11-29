@@ -7,7 +7,7 @@ public class HomeView extends JPanel {
 
     HomeView(MainWindow w) {
         parent = w;
-        this.setLayout(new GridLayout(3,2));
+        this.setLayout(new BorderLayout());
     }
     MainWindow parent;
 

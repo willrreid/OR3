@@ -36,9 +36,24 @@ public class SearchResultView extends JPanel implements ActionListener {
         add(resultPanel(s));
     }
 
+    SearchResultView(String c, String i) {
+
+        submit = new JButton("Submit");
+        submit.addActionListener(this);
+        submit.setActionCommand("submit");
+        add(resultPanel(c,i));
+    }
+
     JPanel resultPanel(String s) {
         JPanel tablePanel = new JPanel();
         resultList = new RestaurantLister(new ArrayList<>(new SqliteRestaurantDAO().search(s)), this);
+        tablePanel.add(resultList);
+        return tablePanel;
+    }
+
+    JPanel resultPanel(String c, String i) {
+        JPanel tablePanel = new JPanel();
+        resultList = new RestaurantLister(new ArrayList<>(new SqliteRestaurantDAO().reviewFilter(c, i)), this);
         tablePanel.add(resultList);
         return tablePanel;
     }
@@ -115,6 +130,7 @@ public class SearchResultView extends JPanel implements ActionListener {
                 r.setBody(review.getText());
                 new SqliteReviewDAO().save(r);
                 displayForRestaurant(resultList.getSelected().getRestaurant());
+                resultList.getSelected().updateAverage();
         }
     }
 }

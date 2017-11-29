@@ -15,6 +15,7 @@ public class MainWindow implements ActionListener {
     private JPanel topBar;
     private JPanel currentMainPanel;
 
+    JComboBox searchType = new JComboBox();
     JTextField searchField = new JTextField(30);
     JButton searchButton = new JButton("Search");
     JButton loginButton = new JButton("Log In");
@@ -22,6 +23,10 @@ public class MainWindow implements ActionListener {
     JButton adminPanelButton = new JButton("Admin Panel");
 
     public MainWindow() {
+
+        searchType.addItem("Name");
+        searchType.addItem("Average >=");
+        searchType.addItem("Average <=");
 
         searchField.setActionCommand("updated");
         searchField.addActionListener(this);
@@ -35,7 +40,7 @@ public class MainWindow implements ActionListener {
         logoutButton.setActionCommand("logout");
         logoutButton.addActionListener(this);
 
-        adminPanelButton.setActionCommand("newRestaurant");
+        adminPanelButton.setActionCommand("adminPanel");
         adminPanelButton.addActionListener(this);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -68,6 +73,7 @@ public class MainWindow implements ActionListener {
     private JPanel initTop() {
         JPanel panel = new JPanel();
 
+        panel.add(searchType);
         panel.add(searchField);
         panel.add(searchButton);
         if (Authenticator.loggedInUser() == null) {
@@ -85,9 +91,14 @@ public class MainWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand())  {
             case "search":
-                System.out.println("got a search");
                 frame.getContentPane().remove(currentMainPanel);
-                currentMainPanel = new SearchResultView(searchField.getText());
+                if (searchType.getSelectedItem().equals("Name")) {
+                    currentMainPanel = new SearchResultView(searchField.getText());
+                } else if (searchType.getSelectedItem().equals("Average >=")) {
+                    currentMainPanel = new SearchResultView(">=", searchField.getText());
+                } else if (searchType.getSelectedItem().equals("Average <=")) {
+                    currentMainPanel = new SearchResultView("<=", searchField.getText());
+                }
                 frame.getContentPane().add(currentMainPanel, BorderLayout.CENTER);
                 frame.getContentPane().validate();
                 frame.setVisible(true);
@@ -116,7 +127,7 @@ public class MainWindow implements ActionListener {
                 topBar.revalidate();
                 break;
 
-            case "newRestaurant":
+            case "adminPanel":
                 new AdminPanel();
                 break;
 

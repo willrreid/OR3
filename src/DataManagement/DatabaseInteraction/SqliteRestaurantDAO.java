@@ -56,7 +56,6 @@ public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM restaurant WHERE name LIKE \"%" + s +"%\"");
             while (rs.next()) {
-                System.out.println("A RESULT");
                 result.add(extractFromResultSet(rs));
             }
             stmt.close();
@@ -64,7 +63,43 @@ public class SqliteRestaurantDAO extends SqliteDAO<Restaurant>{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.print(result);
+        return result;
+    }
+
+    public Set<Restaurant> reviewFilter(String comparator, String i) {
+        Connection connection = ConnectionFactory.getConnection();
+        Set<Restaurant> result = new HashSet<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT restaurant.*, AVG(review.rating) AS avg_rate FROM restaurant " +
+                    "LEFT OUTER JOIN review ON review.restaurant_id = restaurant.id group by " +
+                    "restaurant.id having avg_rate " + comparator + " " + i);
+            while (rs.next()) {
+                result.add(extractFromResultSet(rs));
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public float reviewAverageForRestaurantID(int i) {
+        Connection connection = ConnectionFactory.getConnection();
+        float result = 0;
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("Select avg(review.rating) AS avg_rate FROM restaurant " +
+                    "LEFT OUTER JOIN review ON review.restaurant_id = restaurant.id group by " +
+                    "restaurant.id having restaurant.id == " + String.valueOf(i));
+            while (rs.next()) {
+                result = rs.getFloat("avg_rate");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return result;
     }
 
