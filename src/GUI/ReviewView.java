@@ -1,10 +1,15 @@
 package GUI;
 
+import DataManagement.DatabaseInteraction.SqliteReviewDAO;
 import DataManagement.DatabaseInteraction.SqliteUserDAO;
 import DataManagement.DatabaseTransferObject.Review;
+import DataManagement.DatabaseTransferObject.User;
+import UserAuthentication.Authenticator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by will on 11/8/17.
@@ -14,10 +19,10 @@ public class ReviewView extends JPanel {
     private Review review;
     private Boolean selected = false;
 
-    public ReviewView(Review r){
+    public ReviewView(Review r, ReviewLister parent){
+
         this.review = r;
         JLabel userID, rating, time;
-        JTextField body;
 
         setSize(300,100);
         setMaximumSize(new Dimension(300, 300));
@@ -44,6 +49,19 @@ public class ReviewView extends JPanel {
         reviewArea.setText(r.getBody());
 
         add(reviewArea, BorderLayout.CENTER);
+
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new SqliteReviewDAO().delete(r.getId());
+                parent.updateParent();
+            }
+        });
+
+        if (Authenticator.loggedInUser() != null && Authenticator.loggedInUser().isAdmin()) {
+            add(deleteButton, BorderLayout.SOUTH);
+        }
 
         setBorder(BorderFactory.createTitledBorder("Review"));
 

@@ -63,7 +63,6 @@ public class SqliteReviewDAO extends SqliteDAO<Review> {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.print(result);
         return result;
     }
 

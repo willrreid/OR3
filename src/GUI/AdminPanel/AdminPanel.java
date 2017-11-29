@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class AdminPanel extends JDialog {
     private JButton addRestaurant = new JButton("Add Restaurant");
     private JButton manageAdmins = new JButton("Manage Admins");
-    private JButton getStatistics = new JButton("Get Statistics");
     private JButton exitButton = new JButton("Exit");
 
     public AdminPanel() {
@@ -26,7 +25,7 @@ public class AdminPanel extends JDialog {
 
         this.add(addRestaurant);
         this.add(manageAdmins);
-        this.add(getStatistics);
+        //this.add(getStatistics);
         this.add(exitButton);
 
         this.setVisible(true);
@@ -43,13 +42,6 @@ public class AdminPanel extends JDialog {
         manageAdmins.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { new ManageAdmins(); }
-        });
-
-        getStatistics.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
         });
 
         exitButton.addActionListener(new ActionListener() {

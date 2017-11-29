@@ -19,13 +19,17 @@ public class ReviewLister extends JPanel {
     private List<ReviewView> reviewViews = new ArrayList<>();
     private ReviewView selected = null;
 
+    public void updateParent() {
+        parent.displayForRestaurant(parent.getResultList().getSelected().getRestaurant());
+        parent.getResultList().getSelected().updateAverage();
+    }
+
     public ReviewLister(List<Review> reviews, SearchResultView parent) {
         this.parent = parent;
         this.reviews = reviews;
 
         for (Review r : this.reviews) {
-            System.out.print("ADDING A REVIEW");
-            reviewViews.add(new ReviewView(r));
+            reviewViews.add(new ReviewView(r, this));
         }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

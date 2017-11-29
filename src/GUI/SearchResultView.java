@@ -27,6 +27,10 @@ public class SearchResultView extends JPanel implements ActionListener {
     JTextArea review;
     JButton submit;
 
+    public RestaurantLister getResultList() {
+        return resultList;
+    }
+
     SearchResultView(String s) {
 
         submit = new JButton("Submit");
@@ -83,7 +87,12 @@ public class SearchResultView extends JPanel implements ActionListener {
         review = new JTextArea(20,20);
         review.setLineWrap(true);
 
-        container.add(rating, BorderLayout.NORTH);
+        JPanel ratingBar = new JPanel();
+        ratingBar.setLayout(new GridLayout(1, 2));
+        ratingBar.add(new JLabel("Rating:"));
+        ratingBar.add(rating);
+
+        container.add(ratingBar, BorderLayout.NORTH);
         container.add(review, BorderLayout.CENTER);
         container.add(submit, BorderLayout.SOUTH);
 

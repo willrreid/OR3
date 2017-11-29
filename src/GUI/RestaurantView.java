@@ -14,22 +14,25 @@ public class RestaurantView extends JPanel {
 
     public RestaurantView(Restaurant r){
         this.restaurant = r;
-        JLabel addressLabel, categoryLabel, websiteLabel, averageLabel;
+        JLabel categoryLabel;
+        JTextField addressField, websiteField;
 
         setMaximumSize(new Dimension(300, 100));
 
-        addressLabel = new JLabel(r.getAddress());
+        addressField = new JTextField(r.getAddress());
+        addressField.setEditable(false);
         categoryLabel = new JLabel(r.getCategory());
-        websiteLabel = new JLabel(r.getWebsite());
+        websiteField = new JTextField(r.getWebsite());
+        websiteField.setEditable(false);
         this.averageLabel = new JLabel(Float.toString(new SqliteRestaurantDAO().reviewAverageForRestaurantID(r.getId())));
 
         setLayout(new GridLayout(4,2,0,0));
         add(new JLabel("Address:"));
-        add(addressLabel);
+        add(addressField);
         add(new JLabel("Category:"));
         add(categoryLabel);
         add(new JLabel("Website:"));
-        add(websiteLabel);
+        add(websiteField);
         add(new JLabel("Average Rating:"));
         add(this.averageLabel);
 

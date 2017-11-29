@@ -22,7 +22,6 @@ public class RestaurantLister extends JPanel {
         this.restaurants = restaurants;
 
         for (Restaurant r : this.restaurants) {
-            System.out.print("ADDING A RESTAURANT");
             restaurantViews.add(new RestaurantView(r));
         }
 
