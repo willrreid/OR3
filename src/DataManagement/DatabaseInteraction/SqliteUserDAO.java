@@ -25,7 +25,7 @@ public class SqliteUserDAO extends SqliteDAO<User>{
                 ps = connection.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?)");
             } else {
                 ps = connection.prepareStatement("UPDATE user SET username=?, password=?, join_date=?, bio=?, admin=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(5, user.getId());
+                ps.setInt(6, user.getId());
             }
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
