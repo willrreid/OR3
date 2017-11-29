@@ -7,7 +7,6 @@ public class Report {
     //Database Fields
     private Integer id;
     private Integer reporting_user;
-    private Integer reported_user;
     private Integer review_id;
     private Integer time;
     private String message;
@@ -16,9 +15,8 @@ public class Report {
     public Report(){
     }
 
-    public Report(Integer reporting_user, Integer reported_user, Integer review_id, Integer time, String message){
+    public Report(Integer reporting_user, Integer review_id, Integer time, String message){
         setReporting_user(reporting_user);
-        setReported_user(reported_user);
         setReview_id(review_id);
         setTime(time);
         setMessage(message);
@@ -48,14 +46,6 @@ public class Report {
 
     public void setReporting_user(Integer reporting_user) {
         this.reporting_user = reporting_user;
-    }
-
-    public Integer getReported_user() {
-        return reported_user;
-    }
-
-    public void setReported_user(Integer reported_user) {
-        this.reported_user = reported_user;
     }
 
     public Integer getTime() {

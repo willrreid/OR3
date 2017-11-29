@@ -26,8 +26,8 @@ public class DB_TEST {
         Review review1 = new Review(1, 1, 100, 10, "Great food!");
         Review review2 = new Review(2, 2,200, 5, "Ok I guess.");
 
-        Report report1 = new Report(1, 2, 1, 66, "Rude af");
-        Report report2 = new Report(2, 1, 2, 77, "Bein mean");
+        Report report1 = new Report(1, 1, 66, "Rude af");
+        Report report2 = new Report(2, 2, 77, "Bein mean");
 
         userDAO.save(user1);
         userDAO.save(user2);

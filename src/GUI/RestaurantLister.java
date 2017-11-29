@@ -47,6 +47,8 @@ public class RestaurantLister extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     if (getSelected() != null) {
                         getSelected().setSelected(false);
+                    } else {
+                        parent.displayNone();
                     }
                     if (getSelected() == rv){
                         setSelected(null);
@@ -55,6 +57,7 @@ public class RestaurantLister extends JPanel {
                     else {
                         setSelected(rv);
                         rv.setSelected(true);
+                        parent.displayForRestaurant(rv.getRestaurant());
                     }
                 }
 

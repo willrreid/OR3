@@ -3,6 +3,7 @@ package GUI;
 import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 import DataManagement.DatabaseInteraction.SqliteReviewDAO;
 import DataManagement.DatabaseTransferObject.Restaurant;
+import DataManagement.DatabaseTransferObject.Review;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,6 @@ public class SearchResultView extends JPanel implements ActionListener {
     JButton submit;
 
     SearchResultView(String s) {
-        review = new JTextArea();
 
         submit = new JButton("Submit");
         submit.addActionListener(this);
@@ -62,6 +62,8 @@ public class SearchResultView extends JPanel implements ActionListener {
         JPanel container = new JPanel();
         container.setLayout(new BorderLayout());
 
+        review = new JTextArea(20,20);
+
         container.add(review, BorderLayout.CENTER);
         container.add(submit, BorderLayout.SOUTH);
 
@@ -70,16 +72,37 @@ public class SearchResultView extends JPanel implements ActionListener {
     }
 
     public void displayForRestaurant(Restaurant r) {
-        remove(infoView);
-        remove(writeView);
+        if (infoView != null) {
+            remove(infoView);
+        }
+        if (writeView != null) {
+            remove(writeView);
+        }
         infoView = info(r);
         writeView = addReview();
         add(infoView);
-        add(infoView);
+        add(writeView);
         validate();
     }
 
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void displayNone() {
+        if (infoView != null) {
+            remove(infoView);
+        }
+        if (writeView != null) {
+            remove(writeView);
+        }
+        infoView = null;
+        writeView = null;
+        validate();
+    }
 
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+            case "submit":
+                Review r = new Review();
+                r.setBody(review.getText());
+                new SqliteReviewDAO().save(r);
+        }
     }
 }
