@@ -4,12 +4,15 @@ import DataManagement.DatabaseInteraction.SqliteRestaurantDAO;
 import DataManagement.DatabaseInteraction.SqliteReviewDAO;
 import DataManagement.DatabaseTransferObject.Restaurant;
 import DataManagement.DatabaseTransferObject.Review;
+import DataManagement.DatabaseTransferObject.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by will on 10/25/17.
@@ -100,7 +103,13 @@ public class SearchResultView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "submit":
-                Review r = new Review();
+                User user = UserAuthentication.Authenticator.loggedInUser();
+                if (user == null){
+                    JOptionPane.showMessageDialog(new Frame(), "Please log in before submitting a review.");
+                    return;
+                }
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                Review r = new Review(user.getId(),resultList.getSelected().getRestaurant().getId(), sdf.format(new Date()), 5, review.getText());
                 r.setBody(review.getText());
                 new SqliteReviewDAO().save(r);
         }

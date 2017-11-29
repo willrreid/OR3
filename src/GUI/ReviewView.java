@@ -1,5 +1,6 @@
 package GUI;
 
+import DataManagement.DatabaseInteraction.SqliteUserDAO;
 import DataManagement.DatabaseTransferObject.Review;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class ReviewView extends JPanel {
 
         setMaximumSize(new Dimension(300, 100));
 
-        userID = new JLabel(r.getUser_id().toString());
+        userID = new JLabel(new SqliteUserDAO().getById(r.getUser_id()).getUsername());
         rating = new JLabel(r.getRating().toString());
         time = new JLabel(r.getTime().toString());
         body = new JTextField(r.getBody());

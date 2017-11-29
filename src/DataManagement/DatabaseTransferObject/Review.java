@@ -8,7 +8,7 @@ public class Review {
     private Integer id;
     private Integer user_id;
     private Integer restaurant_id;
-    private Integer time;
+    private String time;
     private Integer rating;
     private String body;
 
@@ -16,7 +16,7 @@ public class Review {
     public Review(){
     }
 
-    public Review(Integer user_id, Integer restaurant_id, Integer time, Integer rating, String body){
+    public Review(Integer user_id, Integer restaurant_id, String time, Integer rating, String body){
         setUser_id(user_id);
         setRestaurant_id(restaurant_id);
         setTime(time);
@@ -24,7 +24,7 @@ public class Review {
         setBody(body);
     }
 
-    public Review(Integer id, Integer user_id, Integer restaurant_id, Integer time, Integer rating, String body){
+    public Review(Integer id, Integer user_id, Integer restaurant_id, String time, Integer rating, String body){
         setId(id);
         setUser_id(user_id);
         setRestaurant_id(restaurant_id);
@@ -54,11 +54,11 @@ public class Review {
 
     public void setRestaurant_id(Integer restaurant_id) { this.restaurant_id = restaurant_id; }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

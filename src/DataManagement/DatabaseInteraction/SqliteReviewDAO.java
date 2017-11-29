@@ -15,7 +15,7 @@ public class SqliteReviewDAO extends SqliteDAO<Review> {
         review.setId(rs.getInt("id"));
         review.setUser_id(rs.getInt("user_id"));
         review.setRestaurant_id(rs.getInt("restaurant_id"));
-        review.setTime(rs.getInt("time"));
+        review.setTime(rs.getString("time"));
         review.setRating(rs.getInt("rating"));
         review.setBody(rs.getString("body"));
         return review;
@@ -32,7 +32,7 @@ public class SqliteReviewDAO extends SqliteDAO<Review> {
             }
             ps.setInt(1, review.getUser_id());
             ps.setInt(2, review.getRestaurant_id());
-            ps.setInt(3, review.getTime());
+            ps.setString(3, review.getTime());
             ps.setInt(4, review.getRating());
             ps.setString(5, review.getBody());
             int i = ps.executeUpdate();
