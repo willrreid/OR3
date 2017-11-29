@@ -38,7 +38,7 @@ public class ReviewView extends JPanel {
         infoPanel.add(userID);
         infoPanel.add(new JLabel("Rating:"));
         infoPanel.add(rating);
-        infoPanel.add(new JLabel("Time:"));
+        infoPanel.add(new JLabel("Date:"));
         infoPanel.add(time);
 
         setLayout(new BorderLayout());
@@ -47,6 +47,7 @@ public class ReviewView extends JPanel {
         JTextArea reviewArea = new JTextArea();
         reviewArea.setLineWrap(true);
         reviewArea.setText(r.getBody());
+        reviewArea.setEditable(false);
 
         add(reviewArea, BorderLayout.CENTER);
 
