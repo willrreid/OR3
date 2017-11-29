@@ -19,23 +19,31 @@ public class ReviewView extends JPanel {
         JLabel userID, rating, time;
         JTextField body;
 
-        setMaximumSize(new Dimension(300, 100));
+        setSize(300,100);
+        setMaximumSize(new Dimension(300, 300));
+
+        JPanel infoPanel = new JPanel();
 
         userID = new JLabel(new SqliteUserDAO().getById(r.getUser_id()).getUsername());
         rating = new JLabel(r.getRating().toString());
         time = new JLabel(r.getTime().toString());
-        body = new JTextField(r.getBody());
-        body.setEditable(false);
 
-        setLayout(new GridLayout(4,2,0,0));
-        add(new JLabel("Posted By:"));
-        add(userID);
-        add(new JLabel("Rating:"));
-        add(rating);
-        add(new JLabel("Time:"));
-        add(time);
-        add(new JLabel("Review:"));
-        add(body);
+        infoPanel.setLayout(new GridLayout(3,2,0,0));
+        infoPanel.add(new JLabel("Posted By:"));
+        infoPanel.add(userID);
+        infoPanel.add(new JLabel("Rating:"));
+        infoPanel.add(rating);
+        infoPanel.add(new JLabel("Time:"));
+        infoPanel.add(time);
+
+        setLayout(new BorderLayout());
+        add(infoPanel, BorderLayout.NORTH);
+
+        JTextArea reviewArea = new JTextArea();
+        reviewArea.setLineWrap(true);
+        reviewArea.setText(r.getBody());
+
+        add(reviewArea, BorderLayout.CENTER);
 
         setBorder(BorderFactory.createTitledBorder("Review"));
 

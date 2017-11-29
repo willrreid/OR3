@@ -66,6 +66,7 @@ public class SearchResultView extends JPanel implements ActionListener {
         rating.addItem(4);
         rating.addItem(5);
         review = new JTextArea(20,20);
+        review.setLineWrap(true);
 
         container.add(rating, BorderLayout.NORTH);
         container.add(review, BorderLayout.CENTER);
@@ -113,6 +114,7 @@ public class SearchResultView extends JPanel implements ActionListener {
                 Review r = new Review(user.getId(),resultList.getSelected().getRestaurant().getId(), sdf.format(new Date()), rating.getSelectedIndex()+1, review.getText());
                 r.setBody(review.getText());
                 new SqliteReviewDAO().save(r);
+                displayForRestaurant(resultList.getSelected().getRestaurant());
         }
     }
 }
