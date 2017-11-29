@@ -21,6 +21,7 @@ public class MainWindow implements ActionListener {
     JButton searchButton = new JButton("Search");
     JButton loginButton = new JButton("Log In");
     JButton profileButton = new JButton("Profile");
+    JButton newRestaurantButton = new JButton("New Restaurant");
 
     public MainWindow() {
 
@@ -35,6 +36,9 @@ public class MainWindow implements ActionListener {
 
         profileButton.setActionCommand("profile");
         profileButton.addActionListener(this);
+
+        newRestaurantButton.setActionCommand("newRestaurant");
+        newRestaurantButton.addActionListener(this);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -69,6 +73,7 @@ public class MainWindow implements ActionListener {
         panel.add(searchField);
         panel.add(searchButton);
         panel.add(loginButton);
+        panel.add(newRestaurantButton);
 
         return panel;
     }
@@ -97,6 +102,10 @@ public class MainWindow implements ActionListener {
 
             case "profile":
                 System.out.println("HEY LOSER");
+                break;
+
+            case "newRestaurant":
+                new CreateRestaurant();
                 break;
 
             case "home":
