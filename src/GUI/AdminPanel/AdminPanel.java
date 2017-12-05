@@ -1,9 +1,17 @@
 package GUI.AdminPanel;
 
+import DataManagement.DatabaseInteraction.SqliteReportDAO;
+import DataManagement.DatabaseInteraction.SqliteReviewDAO;
+import DataManagement.DatabaseTransferObject.Report;
+import DataManagement.DatabaseTransferObject.Review;
+import GUI.ReviewLister;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by will on 10/21/17.
@@ -11,6 +19,7 @@ import java.awt.event.ActionListener;
 public class AdminPanel extends JDialog {
     private JButton addRestaurant = new JButton("Add Restaurant");
     private JButton manageAdmins = new JButton("Manage Admins");
+    private JButton viewFlaggedReviews = new JButton("View Flagged Reviews");
     private JButton exitButton = new JButton("Exit");
 
     public AdminPanel() {
@@ -26,6 +35,7 @@ public class AdminPanel extends JDialog {
         this.add(addRestaurant);
         this.add(manageAdmins);
         //this.add(getStatistics);
+        this.add(viewFlaggedReviews);
         this.add(exitButton);
 
         this.setVisible(true);
@@ -42,6 +52,11 @@ public class AdminPanel extends JDialog {
         manageAdmins.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { new ManageAdmins(); }
+        });
+
+        viewFlaggedReviews.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { new ViewReported();}
         });
 
         exitButton.addActionListener(new ActionListener() {

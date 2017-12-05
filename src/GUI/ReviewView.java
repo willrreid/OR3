@@ -1,7 +1,9 @@
 package GUI;
 
+import DataManagement.DatabaseInteraction.SqliteReportDAO;
 import DataManagement.DatabaseInteraction.SqliteReviewDAO;
 import DataManagement.DatabaseInteraction.SqliteUserDAO;
+import DataManagement.DatabaseTransferObject.Report;
 import DataManagement.DatabaseTransferObject.Review;
 import DataManagement.DatabaseTransferObject.User;
 import UserAuthentication.Authenticator;
@@ -18,9 +20,11 @@ public class ReviewView extends JPanel {
 
     private Review review;
     private Boolean selected = false;
+    private JButton deleteButton;
+    private ReviewLister parent;
 
     public ReviewView(Review r, ReviewLister parent){
-
+        this.parent = parent;
         this.review = r;
         JLabel userID, rating, time;
 
@@ -51,17 +55,31 @@ public class ReviewView extends JPanel {
 
         add(reviewArea, BorderLayout.CENTER);
 
-        JButton deleteButton = new JButton("Delete");
+        deleteButton = new JButton("Delete");
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new SqliteReviewDAO().delete(r.getId());
                 parent.updateParent();
+                removeMe();
+            }
+        });
+
+        JButton reportButton = new JButton("Report as Inappropriate");
+        reportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Report report = new Report(UserAuthentication.Authenticator.loggedInUser().getId(), r.getId(), 1, "");
+                new SqliteReportDAO().save(report);
+                reportButton.setText("Flagged for Review");
+                reportButton.setEnabled(false);
             }
         });
 
         if (Authenticator.loggedInUser() != null && Authenticator.loggedInUser().isAdmin()) {
             add(deleteButton, BorderLayout.SOUTH);
+        } else if (Authenticator.loggedInUser() != null){
+            add(reportButton, BorderLayout.SOUTH);
         }
 
         setBorder(BorderFactory.createTitledBorder("Review"));
@@ -81,6 +99,14 @@ public class ReviewView extends JPanel {
 
     public boolean isSelected(){
         return this.selected;
+    }
+
+    public JButton getDeleteButton(){
+        return this.deleteButton;
+    }
+
+    public void removeMe(){
+        parent.removeReviewView(this);
     }
 }
 

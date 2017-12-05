@@ -1,9 +1,12 @@
 package GUI;
 
 import DataManagement.DatabaseTransferObject.Review;
+import GUI.AdminPanel.ViewReported;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -20,8 +23,16 @@ public class ReviewLister extends JPanel {
     private ReviewView selected = null;
 
     public void updateParent() {
+        if (parent == null) return;
         parent.displayForRestaurant(parent.getResultList().getSelected().getRestaurant());
         parent.getResultList().getSelected().updateAverage();
+    }
+
+    public void removeReviewView(ReviewView rV){
+        this.remove(rV);
+        rV.setVisible(false);
+        this.revalidate();
+        this.repaint();
     }
 
     public ReviewLister(List<Review> reviews, SearchResultView parent) {
@@ -91,5 +102,9 @@ public class ReviewLister extends JPanel {
 
     public void setSelected(ReviewView selected) {
         this.selected = selected;
+    }
+
+    public List<ReviewView> getReviewViews(){
+        return this.reviewViews;
     }
 }
