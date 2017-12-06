@@ -1,8 +1,11 @@
 package DataManagement.DatabaseInteraction;
 
 import DataManagement.DatabaseTransferObject.Report;
+import UserAuthentication.Authenticator;
 
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SqliteReportDAO extends SqliteDAO<Report> {
     protected String table_name = "report";
@@ -43,6 +46,26 @@ public class SqliteReportDAO extends SqliteDAO<Report> {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public static boolean wasReported(int reviewID) {
+        if (Authenticator.loggedInUser() == null) {
+            return false;
+        }
+        ResultSet rs;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            Set<Report> Result = new HashSet<Report>();
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT * FROM report WHERE reporting_user=? AND review_id=?"
+            );
+            ps.setInt(1, Authenticator.loggedInUser().getId());
+            ps.setInt(2, reviewID);
+            rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override

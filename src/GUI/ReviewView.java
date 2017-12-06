@@ -66,6 +66,10 @@ public class ReviewView extends JPanel {
         });
 
         JButton reportButton = new JButton("Report as Inappropriate");
+        if (SqliteReportDAO.wasReported(r.getId())) {
+            reportButton.setText("Flagged for Review");
+            reportButton.setEnabled(false);
+        }
         reportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -78,8 +82,9 @@ public class ReviewView extends JPanel {
 
         if (Authenticator.loggedInUser() != null && Authenticator.loggedInUser().isAdmin()) {
             add(deleteButton, BorderLayout.SOUTH);
-        } else if (Authenticator.loggedInUser() != null){
+        } else if (Authenticator.loggedInUser() != null && r.getUser_id() != Authenticator.loggedInUser().getId()){
             add(reportButton, BorderLayout.SOUTH);
+
         }
 
         setBorder(BorderFactory.createTitledBorder("Review"));
