@@ -53,6 +53,15 @@ public class DB_TEST {
         System.out.println(reviewDAO.getById(1));
         System.out.println(reportDAO.getById(1));
 
+        System.out.println(reportDAO.wasReported(review1.getId()));
+        System.out.println(reportDAO.wasReported(review2.getId()));
+
+        System.out.println(reviewDAO.getForRestaurantID(restaurant1.getId()));
+
+        System.out.println(restaurantDAO.search("M"));
+        System.out.println(restaurantDAO.reviewFilter("<","5"));
+        System.out.println(restaurantDAO.reviewAverageForRestaurantID(2));
+
         User editedUser = userDAO.getById(1);
         editedUser.setBio("Wow look I changed my bio!");
         userDAO.save(editedUser);
