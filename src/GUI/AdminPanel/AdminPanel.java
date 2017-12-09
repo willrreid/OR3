@@ -27,7 +27,7 @@ public class AdminPanel extends JDialog {
         setUpListeners();
     }
 
-    public void setupUI() {
+    private void setupUI() {
         this.setTitle("Admin Panel");
         this.setSize(300,100);
         this.setLayout(new GridLayout(4,2));
